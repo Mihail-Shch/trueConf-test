@@ -1,5 +1,8 @@
 <template>
-  <div class="trafficLight-color" :class="{ active: isActive }"></div>
+  <div
+    class="trafficLight-color"
+    :class="{ active: ifIsActive, blinking: ifTimeToBlink }"
+  ></div>
 </template>
 
 <script>
@@ -11,18 +14,14 @@ export default {
   },
   props: {
     color: String,
+    timeLeft: Number,
   },
-  watch: {
-    "$route.path"() {
-      this.setActiveColorByRoute();
+  computed: {
+    ifTimeToBlink() {
+      return this.isActive && this.timeLeft < 3;
     },
-  },
-  created() {
-    this.setActiveColorByRoute();
-  },
-  methods: {
-    setActiveColorByRoute() {
-      this.isActive = this.$route.path === this.color;
+    ifIsActive() {
+      return (this.isActive = this.$route.path === this.color);
     },
   },
 };
@@ -43,5 +42,21 @@ export default {
 
 .active {
   opacity: 1;
+}
+
+.blinking {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 </style>
