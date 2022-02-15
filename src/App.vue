@@ -1,9 +1,21 @@
 <template>
   <div id="app">
     <div class="trafficLight">
-      <TrafficLightColor class="trafficLight-red" color="/red" />
-      <TrafficLightColor class="trafficLight-yellow" color="/yellow" />
-      <TrafficLightColor class="trafficLight-green" color="/green" />
+      <TrafficLightColor
+        class="trafficLight-red"
+        color="/red"
+        :timeLeft="time"
+      />
+      <TrafficLightColor
+        class="trafficLight-yellow"
+        color="/yellow"
+        :timeLeft="time"
+      />
+      <TrafficLightColor
+        class="trafficLight-green"
+        color="/green"
+        :timeLeft="time"
+      />
     </div>
     <TimeLeft :time="time" />
   </div>
